@@ -40,9 +40,13 @@ console.log(html);
 html = $tw.wiki.renderTiddler("text/html","HelloThere",{document: $tw.document});
 console.log(html);
 
-// Require and call a module
+// Require and call a TiddlyWiki core module
 // (We can't use require() because this module (main.js) is external to TW)
 var u = $tw.modules.execute("$:/core/modules/utils/utils.js");
 console.log(u.htmlEncode("<yes it works!>"));
+
+// Require and call a module from one of our integral plugins
+var d = $tw.modules.execute("$:/plugins/tiddlywiki/dummyplugin/dummy.js");
+console.log(d.helloThere());
 
 })();

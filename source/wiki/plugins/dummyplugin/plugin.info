@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/dummyplugin",
+	"description": "A dummy plugin that doesn't do anything useful",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0"
+}
