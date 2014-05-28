@@ -49,4 +49,16 @@ console.log(u.htmlEncode("<yes it works!>"));
 var d = $tw.modules.execute("$:/plugins/tiddlywiki/dummyplugin/dummy.js");
 console.log(d.helloThere());
 
+// Output an unencrypted TW HTML file
+var fs = require("fs");
+fs.writeFileSync("../../../../../index.html",$tw.wiki.renderTiddler("text/plain","$:/core/save/all"),"utf8");
+
+// Output an encrypted TW HTML file 
+$tw.crypto.setPassword("password");
+$tw.wiki.addTiddler(new $tw.Tiddler({title: "$:/isEncrypted", text: "yes"}));
+console.log("encryption status",$tw.wiki.getTiddlerText("$:/isEncrypted"));
+fs.writeFileSync("../../../../../encrypted.html",$tw.wiki.renderTiddler("text/plain","$:/core/save/all"),"utf8");
+$tw.crypto.setPassword(null);
+$tw.wiki.addTiddler(new $tw.Tiddler({title: "$:/isEncrypted", text: "no"}));
+
 })();
