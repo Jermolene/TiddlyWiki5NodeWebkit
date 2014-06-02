@@ -61,4 +61,21 @@ fs.writeFileSync("../../../../../encrypted.html",$tw.wiki.renderTiddler("text/pl
 $tw.crypto.setPassword(null);
 $tw.wiki.addTiddler(new $tw.Tiddler({title: "$:/isEncrypted", text: "no"}));
 
+// Render a tiddler to the DOM and refresh subsequent changes
+var PAGE_TEMPLATE_TITLE = "HelloThere";
+
+var pageWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TEMPLATE_TITLE,{document: document});
+	
+var pageContainer = document.getElementById("tiddlerContent");
+
+pageWidgetNode.render(pageContainer,null);
+
+$tw.wiki.addEventListener("change",function(changes) {
+	pageWidgetNode.refresh(changes,pageContainer,null);
+});
+
+window.setTimeout(function() {
+	$tw.wiki.addTiddler({title: "ExtraMessage", text: "Inserted via a 5s timer"});
+},5 * 1000);
+
 })();
